@@ -96,4 +96,4 @@ $ ./build_android.sh
 
 <b>export PREFIX=./android/$CPU</b> indicates the location of the dynamic library (.so files) after successful compilation (android folder and its subdirectories in the current folder).
 
-<b>Do not seek complex operation, run first!</b>
+<b>Do not do complex operation, run first!</b>
