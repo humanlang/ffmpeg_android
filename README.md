@@ -1,4 +1,4 @@
-# ffmpeg_android
+# FFmpeg_android
 Use FFmpeg in Android, including ffmpeg compile to .so files, system integration and so on.
 
 FFmpeg 5.1.2 compilation
