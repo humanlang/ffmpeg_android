@@ -106,7 +106,7 @@ $ ./build_android.sh
 
 <b>Export the NDK = / Users/yangxinbao/Library/Android/SDK/the NDK / 21.1.6352462</b> modify to your own the NDK directory
 
-<b>export PREFIX=./android/$CPU</b> indicates the location of the dynamic library (.so files) after successful compilation (android folder and its subdirectories under the current folder).
+<b>export PREFIX=./android_so/$CPU</b> indicates the location of the dynamic library (.so files) after successful compilation (android_so folder and its subdirectories under the current folder).
 
 <b>Do not do complex operation, run first!</b>
 
