@@ -1,9 +1,9 @@
-# FFmpeg_android
+# FFmpeg_Android
 Use FFmpeg in Android, including ffmpeg compile to .so files, system integration and so on.
 
 FFmpeg 5.1.2 compilation
 
-1. Required environment: MacOS or linux
+1. Required environment: MacOS or Linux
 
 2. Required files: FFmpeg source package https://ffmpeg.org/
 
