@@ -1,13 +1,13 @@
 # FFmpeg_Android
 Use FFmpeg in Android, including ffmpeg compile to .so files, system integration and so on.
 
-FFmpeg 5.1.2 compilation
+FFmpeg 4.2.8+ compilation
 
 1. Required environment: MacOS or Linux
 
-2. Required files: FFmpeg source package https://ffmpeg.org/
+2. Required files: FFmpeg source package [FFmpeg 4.2.8](https://github.com/FFmpeg/FFmpeg/releases/tag/n4.2.8)
 
-3. The installation location of NDK, you can download it, or find it in the sdk directory of android studio (if it was installed).
+3. The installation location of NDK, you can download it, or find it in the sdk directory of android studio (if it was installed), my NDK version:21.1.6352462
 
 ```
 #!/bin/bash
@@ -25,7 +25,7 @@ ANDROID=android
 CFLAGS=""
 LDFLAGS=""
 
-else
+elif [ $archbit -eq 32 ];then
 echo "build for 32bit"
 ARCH=arm
 CPU=armv7-a
@@ -34,6 +34,16 @@ PLATFORM=armv7a
 ANDROID=androideabi
 CFLAGS="-mfloat-abi=softfp -march=$CPU"
 LDFLAGS="-Wl,--fix-cortex-a8"
+
+else
+echo "build for x86_64"
+ARCH=x86_64
+CPU=x86_64
+API=21
+PLATFORM=x86_64
+ANDROID=android
+CFLAGS=""
+LDFLAGS=""
 fi
 
 export NDK=/Users/yangxinbao/Library/Android/sdk/ndk/21.1.6352462
@@ -42,7 +52,7 @@ export SYSROOT=$NDK/toolchains/llvm/prebuilt/darwin-x86_64/sysroot
 export CROSS_PREFIX=$TOOLCHAIN/$ARCH-linux-$ANDROID-
 export CC=$TOOLCHAIN/$PLATFORM-linux-$ANDROID$API-clang
 export CXX=$TOOLCHAIN/$PLATFORM-linux-$ANDROID$API-clang++
-export PREFIX=./android/$CPU
+export PREFIX=./android_so/$CPU
 
 function build_android {
     ./configure \
@@ -66,10 +76,12 @@ function build_android {
     --disable-ffprobe \
     --disable-ffplay \
     --disable-ffmpeg \
+    --disable-avdevice \
     --disable-debug \
     --disable-doc \
     --enable-avfilter \
     --enable-decoders \
+    --disable-x86asm \
     $ADDITIONAL_CONFIGURE_FLAG
 
     make -j4
@@ -92,8 +104,10 @@ $ ./build_android.sh
 
 <b>archbit=64</b> means that the library is compiled to support the cpu architecture arm64-v8a. If it is changed to a different value, such as archbit=32, it will be compiled to support armeabi-v7a.
 
-<b>Export the NDK = / Users/yangxinbao/Library/Android/SDK/the NDK / 21.1.6352462</b> modified into their own the NDK directory
+<b>Export the NDK = / Users/yangxinbao/Library/Android/SDK/the NDK / 21.1.6352462</b> modify to your own the NDK directory
 
-<b>export PREFIX=./android/$CPU</b> indicates the location of the dynamic library (.so files) after successful compilation (android folder and its subdirectories in the current folder).
+<b>export PREFIX=./android/$CPU</b> indicates the location of the dynamic library (.so files) after successful compilation (android folder and its subdirectories under the current folder).
 
 <b>Do not do complex operation, run first!</b>
+
+If you want to do something more, such as merge the generated so into a single so, first you need compile the static librarys.a file with the [build_android_a.sh](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/build_android_a.sh) script, and merge it into a [libffmpeg.so](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/android_a/armv8-a/libffmpeg.so) with the [merge.sh](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/merge.sh) script.
