@@ -110,4 +110,4 @@ $ ./build_android.sh
 
 <b>Do not do complex operation, run first!</b>
 
-If you want to do something more, such as merge the generated .so files into a single .so file, first you need compile the static librarys.a file with the [build_android_a.sh](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/build_android_a.sh) script, and merge them into a [libffmpeg.so](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/android_a/armv8-a/libffmpeg.so) with the [merge.sh](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/merge.sh) script.
+If you want to do something more, such as merge the generated .so files into a single .so file, first you need compile the static library .a files with the [build_android_a.sh](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/build_android_a.sh) script, and merge them into a [libffmpeg.so](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/android_a/armv8-a/libffmpeg.so) with the [merge.sh](https://github.com/humanlang/ffmpeg_android/blob/main/FFmpeg4.2.8_compile/merge.sh) script.
